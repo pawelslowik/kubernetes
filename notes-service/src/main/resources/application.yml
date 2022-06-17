@@ -6,3 +6,18 @@ spring:
       database: ${MONGO_DB_DATABASE}
       port: ${MONGO_DB_PORT}
       host: ${MONGO_DB_HOST}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "env"
+
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
