@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-service-deployment
+spec:
+  selector:
+    matchLabels:
+      app: notes-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: notes-service
+    spec:
+      containers:
+        - name: notes-service
+          image: pawelslowikdev/notes-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGO_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+            - name: MONGO_DB_DATABASE
+              value: "admin"
+            - name: MONGO_DB_PORT
+              value: "27018"
+            - name: MONGO_DB_HOST
+              value: "mongodb-service"
