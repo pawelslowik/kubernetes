@@ -14,7 +14,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
 
   notes-serrvice:
-    image: "notes-service:latest"
+    image: "pawelslowikdev/notes-service:latest"
     container_name: "notes-service"
     ports:
       - "8080:8080"
