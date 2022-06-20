@@ -11,7 +11,7 @@ For simplicity docker-compose uses default ports and admin database.
 1. mvn clean install
 2. cd target
 3. docker build -t notes-service . (or skip it and just let docker-compose use the image that is now available in https://hub.docker.com/repository/docker/pawelslowikdev/notes-service)
-4. export MONGO_INITDB_ROOT_USERNAME=<value> MONGO_INITDB_ROOT_PASSWORD=<value>
+4. export MONGO_INITDB_ROOT_USERNAME=`<value>` MONGO_INITDB_ROOT_PASSWORD=`<value>`
 5. docker-compose up
 
 **usage**
