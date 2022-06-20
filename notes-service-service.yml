@@ -6,6 +6,7 @@ spec:
   selector:
     app: notes-service
   type: LoadBalancer
+  # currently minikube on windows requires kubectl port-forward service/notes-service-service 30001:8080 to access the service outside the cluster
   ports:
     - protocol: TCP
       port: 8080
