@@ -1,18 +1,33 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx
+  name: busybox
 spec:
   volumes:
   - name: host-path
     persistentVolumeClaim:
       claimName: pvc-host-path
+  - name: nfs
+    persistentVolumeClaim:
+      claimName: pvc-nfs
+    #nfs:
+    # server: kubernetesstoragepremium.file.core.windows.net
+    # path: "/kubernetesstoragepremium/azure-file-share-nfs"
   containers:
-  - name: nginx
-    image: nginx
-    ports:
-    - containerPort: 80
+  - name: busybox-host-path
+    image: busybox:1.26
     volumeMounts:
     - name: host-path
-      mountPath: "/tmp/test"
+      mountPath: "/mnt/volume"
+    args:
+    - cat
+    - "/mnt/volume/test.txt"
+  - name: busybox-nfs
+    image: busybox:1.26
+    volumeMounts:
+    - name: nfs
+      mountPath: "/mnt/volume"
+    args:
+    - cat
+    - "/mnt/volume/test.txt"
 
