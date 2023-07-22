@@ -8,7 +8,7 @@ Examples of creating a p PersistentVolume and PeristentVolumeClaim using host pa
 2. Open NFS port 2049 on nodes. If you use Azure VMs make sure the Azure Stora Account is configured to allow acces from VNET that runs VMs, modify NSGs to allow communication via port 2049.
 3. Run commands on nodes: `sudo mkdir /tmp/persistent-volume` and `sudo sh -c "echo 'Just testing' > /tmp/persistent-volume/test.txt"`
 4. Execute `run.sh`, should display created Kuberneter resources as well as content of files mounted via host path and nfs:o
-
+```
  ./run.sh
 persistentvolume/pv-host-path created
 persistentvolume/pv-nfs created
@@ -25,3 +25,4 @@ Host path:
 Just testing
 NFS:
 Hello from Azure File Share NFS!
+```
