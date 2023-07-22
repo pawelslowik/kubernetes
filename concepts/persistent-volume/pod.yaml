@@ -10,9 +10,6 @@ spec:
   - name: nfs
     persistentVolumeClaim:
       claimName: pvc-nfs
-    #nfs:
-    # server: kubernetesstoragepremium.file.core.windows.net
-    # path: "/kubernetesstoragepremium/azure-file-share-nfs"
   containers:
   - name: busybox-host-path
     image: busybox:1.26
