@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pod
+spec:
+  restartPolicy: Never
+  containers:
+  - name: busybox-no-security-context
+    image: busybox
+    command: ["/bin/sh", "-c"]
+    args:
+      - id;
+        echo "Test, do not panic" >> test.txt;
+        ls -la test.txt;
+  - name: busybox-read-only-filesystem
+    image: busybox
+    securityContext:
+      readOnlyRootFilesystem: true
+    command: ["/bin/sh", "-c"]
+    args:
+      - touch test.txt;
+  - name: busybox-run-as-non-root
+    image: busybox
+    securityContext:
+      runAsNonRoot: true
+    command: ["/bin/sh", "-c"]
+    args:
+      - touch test.txt;
+  - name: busybox-run-as-user
+    image: busybox
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 2000
+    command: ["/bin/sh", "-c"]
+    args:
+      - id;
+  - name: busybox-without-required-capability
+    image: busybox
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo "Date before change $(date)";
+        date -s "2023-08-19 21:00:00";
+        echo "Date after change $(date)";
+  - name: busybox-with-required-capability
+    image: busybox
+    securityContext:
+      capabilities:
+        add: ["SYS_TIME"]
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo "Date before change $(date)";
+        date -s "2023-08-19 21:00:00";
+        echo "Date after change $(date)";
