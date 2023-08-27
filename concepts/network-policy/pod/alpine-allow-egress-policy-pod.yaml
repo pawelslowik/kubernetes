@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-allow-egress-policy-pod
+  labels:
+    policy: allow-egress-policy
+spec:
+  restartPolicy: Never
+  containers:
+  - name: alpine
+    image: alpine
+    command: ["/bin/sh","-c"]
+    args:
+    - |
+      apk add curl;
+      curl -v --connect-timeout 1 nginx-no-policy-service.default.svc.cluster.local; 
+      curl -v --connect-timeout 1 nginx-deny-ingress-policy-service.default.svc.cluster.local;
+      curl -v --connect-timeout 1 nginx-allow-ingress-policy-service.default.svc.cluster.local;

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-allow-ingress-policy-pod
+  labels:
+    app: nginx-allow-ingress-policy-app
+    policy: allow-ingress-policy
+spec:
+  restartPolicy: Never
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
